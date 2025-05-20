@@ -1,66 +1,94 @@
 #include <stdio.h>
 
+// ----------------------------
+// Função recursiva para a Torre (direita)
+// ----------------------------
+void movimentoTorreRecursivo(int casas) {
+    if (casas == 0) return;
+    printf("Direita\n");
+    movimentoTorreRecursivo(casas - 1);
+}
+
+// ----------------------------
+// Função recursiva para a Rainha (esquerda)
+// ----------------------------
+void movimentoRainhaRecursivo(int casas) {
+    if (casas == 0) return;
+    printf("Esquerda\n");
+    movimentoRainhaRecursivo(casas - 1);
+}
+
+// ----------------------------
+// Função recursiva com loop aninhado para o Bispo (diagonal cima-direita)
+// ----------------------------
+void movimentoBispoRecursivo(int casas, int passo) {
+    if (passo > casas) return;
+
+    // Loop externo: vertical (linha)
+    for (int linha = passo; linha <= passo; linha++) {
+        // Loop interno: horizontal (coluna)
+        for (int coluna = passo; coluna <= passo; coluna++) {
+            printf("Cima Direita\n");
+        }
+    }
+
+    movimentoBispoRecursivo(casas, passo + 1);
+}
+
+// ----------------------------
+// Função com loops complexos para o Cavalo (2 cima, 1 direita)
+// ----------------------------
+void movimentoCavaloComplexo(int movimentos) {
+    printf("Movimento do Cavalo (2 casas para Cima, 1 para Direita):\n");
+
+    for (int m = 1; m <= movimentos; m++) {
+        for (int i = 1; i <= 2; i++) {
+            if (i == 2 && m % 2 == 0) continue; // exemplo de controle condicional
+            printf("Cima\n");
+        }
+
+        for (int j = 1; j <= 1; j++) {
+            if (j == 1) {
+                printf("Direita\n");
+                break; // fim do movimento em L
+            }
+        }
+    }
+}
+
 int main() {
     // ----------------------------
-    // Simulação do movimento da Torre (FOR)
+    // Torre (recursiva)
     // ----------------------------
     int casasTorre = 5;
     printf("Movimento da Torre (5 casas para a Direita):\n");
+    movimentoTorreRecursivo(casasTorre);
 
-    for (int i = 1; i <= casasTorre; i++) {
-        printf("Direita\n");
-    }
-
-    // Linha separadora
     printf("----------------------------\n");
 
     // ----------------------------
-    // Simulação do movimento do Bispo (WHILE)
+    // Bispo (recursiva + loops aninhados)
     // ----------------------------
     int casasBispo = 5;
-    int i = 1;
     printf("Movimento do Bispo (5 casas na Diagonal Cima Direita):\n");
+    movimentoBispoRecursivo(casasBispo, 1);
 
-    while (i <= casasBispo) {
-        printf("Cima Direita\n");
-        i++;
-    }
-
-    // Linha separadora
     printf("----------------------------\n");
 
     // ----------------------------
-    // Simulação do movimento da Rainha (DO-WHILE)
+    // Rainha (recursiva)
     // ----------------------------
     int casasRainha = 8;
-    int j = 1;
     printf("Movimento da Rainha (8 casas para a Esquerda):\n");
+    movimentoRainhaRecursivo(casasRainha);
 
-    do {
-        printf("Esquerda\n");
-        j++;
-    } while (j <= casasRainha);
-
-    // Linha em branco antes do Cavalo
     printf("\n");
 
     // ----------------------------
-    // Simulação do movimento do Cavalo (FOR + WHILE)
+    // Cavalo (loops aninhados e controle complexo)
     // ----------------------------
-    int movimentosCavalo = 1; // Quantas vezes o cavalo fará o movimento completo em "L"
-    printf("Movimento do Cavalo (2 casas para Baixo, 1 para Esquerda):\n");
-
-    for (int m = 1; m <= movimentosCavalo; m++) {
-        // Loop interno para 2 casas para baixo (WHILE)
-        int passo = 1;
-        while (passo <= 2) {
-            printf("Baixo\n");
-            passo++;
-        }
-
-        // Após 2 passos para baixo, move 1 para esquerda
-        printf("Esquerda\n");
-    }
+    int movimentosCavalo = 3; // número de movimentos completos em "L"
+    movimentoCavaloComplexo(movimentosCavalo);
 
     return 0;
 }
